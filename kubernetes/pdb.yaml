@@ -1,0 +1,6 @@
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata: {name: migration-target, namespace: migration-demo}
+spec:
+  minAvailable: 1
+  selector: {matchLabels: {app: migration-target}}

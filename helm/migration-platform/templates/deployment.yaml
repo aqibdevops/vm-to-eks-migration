@@ -1,0 +1,15 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "migration-platform.fullname" . }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels: {app: migration-platform}
+  template:
+    metadata: {labels: {app: migration-platform}}
+    spec:
+      containers:
+        - name: target
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          resources: {{- toYaml .Values.resources | nindent 12 }}
